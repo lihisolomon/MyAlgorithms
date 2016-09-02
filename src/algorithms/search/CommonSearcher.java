@@ -1,7 +1,5 @@
 package algorithms.search;
 
-import java.util.Set;
-
 /**
  * CommonSearcher abstract class implements Searcher
  * @param <T> the type of class we will work with
