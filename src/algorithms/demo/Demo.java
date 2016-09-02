@@ -10,7 +10,7 @@ public class Demo {
 	 * run class the run the search
 	 */
 	public static void main(String[] args) {
-	//public void run(int x,int y,int z){lihi
+	//public void run(int x,int y,int z){i have a stupid friend
 		SimpleMaze3dGenerator m=new SimpleMaze3dGenerator();
 		//GrowingTreeGenerator m=new GrowingTreeGenerator();
 		Maze3d maze=m.generate(11,11,11);
