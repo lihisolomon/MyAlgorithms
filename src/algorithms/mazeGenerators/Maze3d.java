@@ -205,7 +205,7 @@ public class Maze3d {
 			direction.add("BACK");
 		if(pZ+2<maze[0][0].length && this.maze[pX][pY][pZ+2]==0 && this.maze[pX][pY][pZ+1]==0)
 			direction.add("RIGHT");
-		else if(pZ-2>-1 && this.maze[pX][pY][pZ-2]==0 && this.maze[pX][pY][pZ-1]==0)
+		if(pZ-2>-1 && this.maze[pX][pY][pZ-2]==0 && this.maze[pX][pY][pZ-1]==0)
 			direction.add("LEFT");
 		
 		return direction.toArray(new String[direction.size()]);

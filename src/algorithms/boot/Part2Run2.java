@@ -8,7 +8,7 @@ public class Part2Run2 {
 	public static void main(String[] args) {
 		//SimpleMaze3dGenerator m=new SimpleMaze3dGenerator();
 		GrowingTreeGenerator m=new GrowingTreeGenerator();
-		Maze3d maze=m.generate(8,8,8);
+		Maze3d maze=m.generate(30,30,30);
 		Maze3dSearchable searchableMaze=new Maze3dSearchable(maze);
 		
 		System.out.println(maze);
