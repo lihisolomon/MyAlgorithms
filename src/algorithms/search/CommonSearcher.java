@@ -45,18 +45,4 @@ public abstract class CommonSearcher<T> implements Searcher<T> {
 		}
 		return sol;
 	}
-	/**
-	 * check if the value are equal
-	 * @param closedList set list
-	 * @param p 
-	 * @return true if the o (type T) exist in the set list or false if the object is not there
-	 */
-	public boolean checkIfPosionWasVisited(Set<State<T>> closedList, T o){
-		for (State<T> s: closedList) {
-			T pos=s.getValue();
-			if(pos.equals(o))
-				return true;
-		}
-		return false;
-	}
 }

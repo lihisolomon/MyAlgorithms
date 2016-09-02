@@ -1,8 +1,7 @@
 package algorithms.search;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.Stack;
 
 /**
@@ -12,14 +11,14 @@ import java.util.Stack;
 public class DFS<T> extends CommonSearcher<T> {
 	
 	private Stack<State<T>> openList;
-	private Set<State<T>> closedList;
+	private ArrayList<State<T>> closedList;
 	
 	/**
 	 * CTOR
 	 */
 	public DFS() {
 		this.openList=new Stack<State<T>>();
-		this.closedList= new HashSet<State<T>>();
+		this.closedList= new ArrayList<State<T>>();
 	}
 	
 	/**
@@ -38,8 +37,8 @@ public class DFS<T> extends CommonSearcher<T> {
 				System.out.println("DFS: number of evaluated Nodes is: "+getNumberOfNodesEvaluated());
 				return backTrace(currState);
 			}
-			if(!checkIfPosionWasVisited(closedList,currState.getValue())){
-			//if(!closedList.contains(currState)) {
+			//if(!checkIfPosionWasVisited(closedList,currState.getValue())){
+			if(!closedList.contains(currState)) {
 				addToEvaluatedNodes();
 				closedList.add(currState);
 				List<State<T>> neighbors = s.getAllPossibleStates(currState);
