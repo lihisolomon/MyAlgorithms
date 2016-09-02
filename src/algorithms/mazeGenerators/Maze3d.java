@@ -1,15 +1,19 @@
 package algorithms.mazeGenerators;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Maze3D Clsss with array, startPosition and EndPosition
- * @author Lihi Solomon
+ * Maze3D Class with array, startPosition and EndPosition
+ * @author Lihi Solomon && Lior ALtarescu
  */
 public class Maze3d {
 	protected int[][][] maze;
 	protected Position start;
 	protected Position end;
+	
+	final private int WALL=1;
+	final private int PATH=0;
 	
 	/**
 	 * Constructor
@@ -26,11 +30,62 @@ public class Maze3d {
 			{
 				for (int j=0; j<maze[0][0].length; j++)
 				{
-					maze[i][k][j]=1;
+					maze[i][k][j]=WALL;
 				}
 			}
 		}
 	}
+	/**
+	 * Constructor
+	 * @param mazeArray - byte array to create maze from 
+	 */
+	public Maze3d(byte [] mazeArray) {
+		int Floor=mazeArray[0];
+		int Row=mazeArray[1];
+		int Col=mazeArray[2];
+			
+		int numberOfTimes,wallOrPath;
+		Position currP=new Position(0,0,0);
+		maze=new int [Floor][Row][Col];
+		
+		setStartPosition(new Position(mazeArray[3], mazeArray[4], mazeArray[5]));
+		setGoalPosition(new Position(mazeArray[6], mazeArray[7], mazeArray[8]));
+		
+		for(int i=9;i<mazeArray.length-1;i=i+2)
+		{
+			numberOfTimes=mazeArray[i];
+			wallOrPath=mazeArray[i+1];
+			
+			for (int x=currP.getX(); x<maze.length; x++)
+			{
+				currP.setX(x);
+				
+				for (int y=currP.getY(); y<maze[0].length; y++)
+				{
+					currP.setY(y);
+					
+					for (int z=currP.getZ(); z<maze[0][0].length; z++)
+					{
+						currP.setZ(z);
+						
+						if(numberOfTimes==0)
+							break;
+						
+						setCell(new Position(x,y,z), wallOrPath);
+						numberOfTimes++;
+						
+					}
+					if(numberOfTimes==0)
+						break;
+				}
+				if(numberOfTimes==0)
+					break;
+			}
+		}
+
+		
+	}
+	
 
 	/**
 	 * get the maze
@@ -61,7 +116,7 @@ public class Maze3d {
 	 * @param start
 	 */
 	public void setStartPosition(Position start) {
-		maze[start.getX()][start.getY()][start.getZ()]=0;
+		maze[start.getX()][start.getY()][start.getZ()]=PATH;
 		this.start = start;
 	}
 
@@ -78,7 +133,7 @@ public class Maze3d {
 	 * @param end
 	 */
 	public void setGoalPosition(Position end) {
-		maze[end.getX()][end.getY()][end.getZ()]=0;
+		maze[end.getX()][end.getY()][end.getZ()]=PATH;
 		this.end = end;
 	}
 	
@@ -195,17 +250,17 @@ public class Maze3d {
 		int pY = pos.getY();
 		int pZ = pos.getZ();
 		
-		if(pX+2<maze.length && this.maze[pX+2][pY][pZ]==0 && this.maze[pX+1][pY][pZ]==0)
+		if(pX+2<maze.length && this.maze[pX+2][pY][pZ]==0 && this.maze[pX+1][pY][pZ]==PATH)
 			direction.add("UP");
-		if(pX-2>-1 && this.maze[pX-2][pY][pZ]==0 && this.maze[pX-1][pY][pZ]==0)
+		if(pX-2>-1 && this.maze[pX-2][pY][pZ]==0 && this.maze[pX-1][pY][pZ]==PATH)
 			direction.add("DOWN");
-		if(pY+2<maze[0].length && this.maze[pX][pY+2][pZ]==0 && this.maze[pX][pY+1][pZ]==0)
+		if(pY+2<maze[0].length && this.maze[pX][pY+2][pZ]==0 && this.maze[pX][pY+1][pZ]==PATH)
 			direction.add("FORWARD");
-		if(pY-2>-1 && this.maze[pX][pY-2][pZ]==0 && this.maze[pX][pY-1][pZ]==0)
+		if(pY-2>-1 && this.maze[pX][pY-2][pZ]==0 && this.maze[pX][pY-1][pZ]==PATH)
 			direction.add("BACK");
-		if(pZ+2<maze[0][0].length && this.maze[pX][pY][pZ+2]==0 && this.maze[pX][pY][pZ+1]==0)
+		if(pZ+2<maze[0][0].length && this.maze[pX][pY][pZ+2]==0 && this.maze[pX][pY][pZ+1]==PATH)
 			direction.add("RIGHT");
-		if(pZ-2>-1 && this.maze[pX][pY][pZ-2]==0 && this.maze[pX][pY][pZ-1]==0)
+		if(pZ-2>-1 && this.maze[pX][pY][pZ-2]==0 && this.maze[pX][pY][pZ-1]==PATH)
 			direction.add("LEFT");
 		
 		return direction.toArray(new String[direction.size()]);
@@ -224,8 +279,82 @@ public class Maze3d {
 		int tX=targetP.getX();
 		int tY=targetP.getY();
 		int tZ=targetP.getZ();
-		this.setCell(new Position((cX+tX)/2, (cY+tY)/2, (cZ+tZ)/2), 0);
-		this.setCell(targetP, 0);
+		this.setCell(new Position((cX+tX)/2, (cY+tY)/2, (cZ+tZ)/2), PATH);
+		this.setCell(targetP, PATH);
 	}
 	
+	/**
+	 * This function returns a compressed maze
+	 * First it input the maze dimentions :Floors,Rows,Colums
+	 * Seconds It inserts the start point and goal point in (x,y,z) format
+	 * Third it inserts all the maze by sum's up all the sequential number for instance:
+	 * 1,1,1 -> 3,1 && 0,0,1,1 -> 2,0,2,1
+	 */
+	public ArrayList toByteArray()
+	{
+		ArrayList mazeByteArray=new ArrayList();
+		int counter=0;
+		boolean isOne=true;
+		
+		//Add maze dimensions
+		mazeByteArray.add(this.getMaze().length);
+		mazeByteArray.add(this.getMaze()[0].length);
+		mazeByteArray.add(this.getMaze()[0][0].length);
+
+		//Add entry point
+		mazeByteArray.add(this.getStartPosition().getX());
+		mazeByteArray.add(this.getStartPosition().getY());
+		mazeByteArray.add(this.getStartPosition().getZ());
+		
+		//Add goal point
+		mazeByteArray.add(this.getGoalPosition().getX());
+		mazeByteArray.add(this.getGoalPosition().getY());
+		mazeByteArray.add(this.getGoalPosition().getZ());
+		
+		for(int i=0;i<this.getMaze().length;i++)
+			for (int j=0;j<this.getMaze()[0].length;j++)
+				for(int k=0;k<this.getMaze()[0][0].length;k++)
+				{
+					if(this.getMaze()[i][j][k]==WALL)
+					{
+						if(counter==255)
+						{
+							mazeByteArray.add(counter);
+							mazeByteArray.add(WALL);
+							counter=0;
+						}
+						if(!isOne)
+						{
+							mazeByteArray.add(counter);
+							mazeByteArray.add(PATH);
+							counter=0;
+						}
+						isOne=true;
+						counter++;
+					}
+					else
+					{
+						if(counter==255)
+						{
+							mazeByteArray.add(counter);
+							mazeByteArray.add(PATH);
+							counter=0;
+						}
+						if(isOne)
+						{
+							mazeByteArray.add(counter);
+							mazeByteArray.add(WALL);
+							counter=0;
+						}
+						isOne=false;
+						counter=1;
+						
+					}
+						
+				}
+		
+		return mazeByteArray;
+	}
 }
+
+

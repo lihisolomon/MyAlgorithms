@@ -1,5 +1,7 @@
 package algorithms.demo;
 
+import java.util.ArrayList;
+
 import algorithms.mazeGenerators.*;
 import algorithms.search.*;
 /**
@@ -9,11 +11,12 @@ public class Demo {
 	/**
 	 * run class the run the search
 	 */
-	//public static void main(String[] args) {
-	public void run(int x,int y,int z){
+	public static void main(String[] args) {
+	//public void run(int x,int y,int z){
 		SimpleMaze3dGenerator m=new SimpleMaze3dGenerator();
-		//GrowingTreeGenerator m=new GrowingTreeGenerator();
-		Maze3d maze=m.generate(x,y,z);
+		//GrowingTreeGenerator m=new GrowingTreeGenerator();lololo
+		//Maze3d maze=m.generate(x,y,z);
+		Maze3d maze=m.generate(3,3,3);
 		Maze3dSearchable searchableMaze=new Maze3dSearchable(maze);
 
 		System.out.println(maze);
@@ -22,7 +25,11 @@ public class Demo {
 		System.out.println("end:");
 		maze.getGoalPosition().printPosition();
 		
-		//---------BFS-----------
+		
+		
+		//ArrayList arr=maze.toByteArray();
+		//System.out.println(arr);
+		/*/---------BFS-----------
 		System.out.println("-----------BFS-------------:");
 		BFS<Position> searcherBFS=new BFS<Position>();
 		Solution<Position> s1=new Solution<Position>();
@@ -37,6 +44,7 @@ public class Demo {
 		System.out.println(s2);
 		
 		System.out.println("finish!!!");
+		/*/
 	}
 
 }
