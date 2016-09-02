@@ -9,11 +9,11 @@ public class Demo {
 	/**
 	 * run class the run the search
 	 */
-	//public static void main(String[] args) {
-	public void run(int x,int y,int z){
-		//SimpleMaze3dGenerator m=new SimpleMaze3dGenerator();
-		GrowingTreeGenerator m=new GrowingTreeGenerator();
-		Maze3d maze=m.generate(x,y,z);
+	public static void main(String[] args) {
+	//public void run(int x,int y,int z){
+		SimpleMaze3dGenerator m=new SimpleMaze3dGenerator();
+		//GrowingTreeGenerator m=new GrowingTreeGenerator();
+		Maze3d maze=m.generate(10,10,10);
 		Maze3dSearchable searchableMaze=new Maze3dSearchable(maze);
 
 		System.out.println(maze);

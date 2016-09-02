@@ -32,7 +32,7 @@ public class DFS<T> extends CommonSearcher<T> {
 		
 		while (!openList.isEmpty()){
 			State<T> currState=openList.pop();
-			addToEvaluatedNodes();
+			
 			if (currState.equals(s.getGoalState())) {
 				System.out.println("DFS: number of evaluated Nodes is: "+getNumberOfNodesEvaluated());
 				return backTrace(currState);
