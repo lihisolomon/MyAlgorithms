@@ -22,7 +22,7 @@ public class Part2Run2 {
 		s=searcherDFS.search(searchableMaze);
 		System.out.println(s);
 		
-		System.out.println("finish!fff!");
+		System.out.println("finish");
 	}
 
 }

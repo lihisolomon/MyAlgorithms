@@ -13,7 +13,7 @@ public class Demo {
 	public void run(int x,int y,int z){
 		//SimpleMaze3dGenerator m=new SimpleMaze3dGenerator();
 		GrowingTreeGenerator m=new GrowingTreeGenerator();
-		Maze3d maze=m.generate(5,5,5);
+		Maze3d maze=m.generate(1,3,3);
 		Maze3dSearchable searchableMaze=new Maze3dSearchable(maze);
 
 		System.out.println(maze);
