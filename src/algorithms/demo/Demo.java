@@ -10,10 +10,10 @@ public class Demo {
 	 * run class the run the search
 	 */
 	public static void main(String[] args) {
-	//public void run(int x,int y,int z){
+	//public void run(int x,int y,int z){lihi
 		SimpleMaze3dGenerator m=new SimpleMaze3dGenerator();
 		//GrowingTreeGenerator m=new GrowingTreeGenerator();
-		Maze3d maze=m.generate(10,10,10);
+		Maze3d maze=m.generate(11,11,11);
 		Maze3dSearchable searchableMaze=new Maze3dSearchable(maze);
 
 		System.out.println(maze);
