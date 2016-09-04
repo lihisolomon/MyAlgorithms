@@ -44,45 +44,34 @@ public class Maze3d {
 		int Row=mazeArray[1];
 		int Col=mazeArray[2];
 			
-		int numberOfTimes,wallOrPath;
-		Position currP=new Position(0,0,0);
+		int numberOfTimes=0;
+		int wallOrPath=0;
+		int i=9;
+		
 		maze=new int [Floor][Row][Col];
 		
 		setStartPosition(new Position(mazeArray[3], mazeArray[4], mazeArray[5]));
 		setGoalPosition(new Position(mazeArray[6], mazeArray[7], mazeArray[8]));
 		
-		for(int i=9;i<mazeArray.length-1;i=i+2)
-		{
-			numberOfTimes=mazeArray[i];
-			wallOrPath=mazeArray[i+1];
-			
-			for (int x=currP.getX(); x<maze.length; x++)
+		
+		for (int x=0; x<maze.length; x++)
+		{	
+			for (int y=0; y<maze[0].length; y++)
 			{
-				currP.setX(x);
-				
-				for (int y=currP.getY(); y<maze[0].length; y++)
+				for (int z=0; z<maze[0][0].length; z++)
 				{
-					currP.setY(y);
-					
-					for (int z=currP.getZ(); z<maze[0][0].length; z++)
+					if(numberOfTimes<=0 && i+1<mazeArray.length)
 					{
-						currP.setZ(z);
 						
-						if(numberOfTimes==0)
-							break;
-						
-						setCell(new Position(x,y,z), wallOrPath);
-						numberOfTimes++;
-						
+						numberOfTimes=mazeArray[i];
+						wallOrPath=mazeArray[i+1];
+						i+=2;
 					}
-					if(numberOfTimes==0)
-						break;
+					setCell(new Position(x,y,z), wallOrPath);
+					numberOfTimes--;
 				}
-				if(numberOfTimes==0)
-					break;
 			}
 		}
-
 		
 	}
 	
@@ -290,26 +279,26 @@ public class Maze3d {
 	 * Third it inserts all the maze by sum's up all the sequential number for instance:
 	 * 1,1,1 -> 3,1 && 0,0,1,1 -> 2,0,2,1
 	 */
-	public ArrayList toByteArray()
+	public byte[] toByteArray()
 	{
-		ArrayList mazeByteArray=new ArrayList();
+		ArrayList<Byte> mazeByteArray=new ArrayList<Byte>();
 		int counter=0;
 		boolean isOne=true;
 		
 		//Add maze dimensions
-		mazeByteArray.add(this.getMaze().length);
-		mazeByteArray.add(this.getMaze()[0].length);
-		mazeByteArray.add(this.getMaze()[0][0].length);
+		mazeByteArray.add((byte) this.getMaze().length);
+		mazeByteArray.add((byte) this.getMaze()[0].length);
+		mazeByteArray.add((byte) this.getMaze()[0][0].length);
 
 		//Add entry point
-		mazeByteArray.add(this.getStartPosition().getX());
-		mazeByteArray.add(this.getStartPosition().getY());
-		mazeByteArray.add(this.getStartPosition().getZ());
+		mazeByteArray.add((byte) this.getStartPosition().getX());
+		mazeByteArray.add((byte) this.getStartPosition().getY());
+		mazeByteArray.add((byte) this.getStartPosition().getZ());
 		
 		//Add goal point
-		mazeByteArray.add(this.getGoalPosition().getX());
-		mazeByteArray.add(this.getGoalPosition().getY());
-		mazeByteArray.add(this.getGoalPosition().getZ());
+		mazeByteArray.add((byte) this.getGoalPosition().getX());
+		mazeByteArray.add((byte) this.getGoalPosition().getY());
+		mazeByteArray.add((byte) this.getGoalPosition().getZ());
 		
 		for(int i=0;i<this.getMaze().length;i++)
 			for (int j=0;j<this.getMaze()[0].length;j++)
@@ -317,43 +306,54 @@ public class Maze3d {
 				{
 					if(this.getMaze()[i][j][k]==WALL)
 					{
-						if(counter==255)
-						{
-							mazeByteArray.add(counter);
-							mazeByteArray.add(WALL);
-							counter=0;
-						}
+						
 						if(!isOne)
 						{
-							mazeByteArray.add(counter);
-							mazeByteArray.add(PATH);
+							mazeByteArray.add((byte) counter);
+							mazeByteArray.add((byte) PATH);
 							counter=0;
 						}
 						isOne=true;
 						counter++;
+						
+						if(counter==255 || (i==this.getMaze().length-1 && j==this.getMaze()[0].length-1 && k==this.getMaze()[0][0].length-1) )
+						{
+							mazeByteArray.add((byte) counter);
+							mazeByteArray.add((byte) WALL);
+							counter=0;
+						}
 					}
 					else
 					{
-						if(counter==255)
-						{
-							mazeByteArray.add(counter);
-							mazeByteArray.add(PATH);
-							counter=0;
-						}
+						
 						if(isOne)
 						{
-							mazeByteArray.add(counter);
-							mazeByteArray.add(WALL);
+							mazeByteArray.add((byte) counter);
+							mazeByteArray.add((byte) WALL);
 							counter=0;
 						}
-						isOne=false;
-						counter=1;
 						
+						isOne=false;
+						counter++;
+						
+						if(counter==255 || (i==this.getMaze().length-1 && j==this.getMaze()[0].length-1 && k==this.getMaze()[0][0].length-1))
+						{
+							mazeByteArray.add((byte) counter);
+							mazeByteArray.add((byte) PATH);
+							counter=0;
+						}
 					}
 						
 				}
 		
-		return mazeByteArray;
+		
+		//return mazeByteArray.toString().getBytes();
+		byte [] arr=new byte[mazeByteArray.size()];
+		for(int i=0;i<arr.length;i++)
+		{
+			arr[i]=mazeByteArray.get(i);
+		}
+		return arr;
 	}
 }
 

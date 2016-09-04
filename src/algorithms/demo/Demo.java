@@ -1,6 +1,7 @@
 package algorithms.demo;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import algorithms.mazeGenerators.*;
 import algorithms.search.*;
@@ -19,6 +20,8 @@ public class Demo {
 		Maze3d maze=m.generate(3,3,3);
 		Maze3dSearchable searchableMaze=new Maze3dSearchable(maze);
 
+		
+		
 		System.out.println(maze);
 		System.out.println("Start:");
 		maze.getStartPosition().printPosition();
@@ -26,9 +29,12 @@ public class Demo {
 		maze.getGoalPosition().printPosition();
 		
 		
+		//
+		byte testMaze2[] = maze.toByteArray();
+		Maze3d mazeLior=new Maze3d(testMaze2);
+		System.out.println("\n\nNew maze : \n\n" + mazeLior);
+		//
 		
-		//ArrayList arr=maze.toByteArray();
-		//System.out.println(arr);
 		/*/---------BFS-----------
 		System.out.println("-----------BFS-------------:");
 		BFS<Position> searcherBFS=new BFS<Position>();
