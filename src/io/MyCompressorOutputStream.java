@@ -66,7 +66,7 @@ public class MyCompressorOutputStream extends OutputStream{
 				islastOne=true;
 				counter++;
 				
-				if(counter==255 )
+				if(counter==255 || i==b.length-1)
 				{
 					out.write(String.valueOf(counter).getBytes());
 					out.write(String.valueOf(deliminator).getBytes());
@@ -90,7 +90,7 @@ public class MyCompressorOutputStream extends OutputStream{
 				islastOne=false;
 				counter++;
 				
-				if(counter==255)
+				if(counter==255|| i==b.length-1)
 				{
 					out.write(String.valueOf(counter).getBytes());
 					out.write(String.valueOf(deliminator).getBytes());

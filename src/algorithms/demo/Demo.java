@@ -22,7 +22,9 @@ public class Demo {
 		//Maze3d maze=m.generate(x,y,z);
 		Maze3d maze=m.generate(3,3,3);
 		Maze3dSearchable searchableMaze=new Maze3dSearchable(maze);
-
+		
+		System.out.println(maze);
+		System.out.println("_____________________________________________________________________");
 		try {
 			OutputStream out=new MyCompressorOutputStream( new FileOutputStream("1.maz")); 
 			out.write(maze.toByteArray());
@@ -49,7 +51,8 @@ public class Demo {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} 
-			//Maze3d loaded=new Maze3d(b); 
+			Maze3d loaded=new Maze3d(b); 
+			System.out.println(loaded);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
