@@ -1,10 +1,13 @@
 package algorithms.demo;
 
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import algorithms.mazeGenerators.*;
 import algorithms.search.*;
+import io.*;
 /**
  * demo class
  */
@@ -20,20 +23,53 @@ public class Demo {
 		Maze3d maze=m.generate(3,3,3);
 		Maze3dSearchable searchableMaze=new Maze3dSearchable(maze);
 
+		try {
+			OutputStream out=new MyCompressorOutputStream( new FileOutputStream("1.maz")); 
+			out.write(maze.toByteArray());
+			out.flush();
+			out.close(); 
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		InputStream in;
+		try {
+			in = new MyDecompressorInputStream( new FileInputStream("1.maz"));
+			byte b[]=new byte[maze.toByteArray().length]; 
+			try {
+				in.read(b);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+			try {
+				in.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+			//Maze3d loaded=new Maze3d(b); 
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		
-		System.out.println(maze);
+		
+		
+	/*/	System.out.println(maze);
 		System.out.println("Start:");
 		maze.getStartPosition().printPosition();
 		System.out.println("end:");
 		maze.getGoalPosition().printPosition();
+		/*/
 		
-		
-		//
+		/*/
 		byte testMaze2[] = maze.toByteArray();
 		Maze3d mazeLior=new Maze3d(testMaze2);
 		System.out.println("\n\nNew maze : \n\n" + mazeLior);
-		//
+		/*/
 		
 		/*/---------BFS-----------
 		System.out.println("-----------BFS-------------:");

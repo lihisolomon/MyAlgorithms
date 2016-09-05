@@ -40,38 +40,23 @@ public class Maze3d {
 	 * @param mazeArray - byte array to create maze from 
 	 */
 	public Maze3d(byte [] mazeArray) {
+		int index=9;
 		int Floor=mazeArray[0];
 		int Row=mazeArray[1];
 		int Col=mazeArray[2];
-			
-		int numberOfTimes=0;
-		int wallOrPath=0;
-		int i=9;
 		
 		maze=new int [Floor][Row][Col];
 		
 		setStartPosition(new Position(mazeArray[3], mazeArray[4], mazeArray[5]));
 		setGoalPosition(new Position(mazeArray[6], mazeArray[7], mazeArray[8]));
 		
-		
-		for (int x=0; x<maze.length; x++)
-		{	
+		for (int x=0; x<maze.length; x++)	
 			for (int y=0; y<maze[0].length; y++)
-			{
 				for (int z=0; z<maze[0][0].length; z++)
 				{
-					if(numberOfTimes<=0 && i+1<mazeArray.length)
-					{
-						
-						numberOfTimes=mazeArray[i];
-						wallOrPath=mazeArray[i+1];
-						i+=2;
-					}
-					setCell(new Position(x,y,z), wallOrPath);
-					numberOfTimes--;
+					setCell(new Position(x,y,z), mazeArray[index]);
+					index++;
 				}
-			}
-		}
 		
 	}
 	
@@ -300,59 +285,14 @@ public class Maze3d {
 		mazeByteArray.add((byte) this.getGoalPosition().getY());
 		mazeByteArray.add((byte) this.getGoalPosition().getZ());
 		
-		for(int i=0;i<this.getMaze().length;i++)
-			for (int j=0;j<this.getMaze()[0].length;j++)
-				for(int k=0;k<this.getMaze()[0][0].length;k++)
-				{
-					if(this.getMaze()[i][j][k]==WALL)
-					{
-						
-						if(!isOne)
-						{
-							mazeByteArray.add((byte) counter);
-							mazeByteArray.add((byte) PATH);
-							counter=0;
-						}
-						isOne=true;
-						counter++;
-						
-						if(counter==255 || (i==this.getMaze().length-1 && j==this.getMaze()[0].length-1 && k==this.getMaze()[0][0].length-1) )
-						{
-							mazeByteArray.add((byte) counter);
-							mazeByteArray.add((byte) WALL);
-							counter=0;
-						}
-					}
-					else
-					{
-						
-						if(isOne)
-						{
-							mazeByteArray.add((byte) counter);
-							mazeByteArray.add((byte) WALL);
-							counter=0;
-						}
-						
-						isOne=false;
-						counter++;
-						
-						if(counter==255 || (i==this.getMaze().length-1 && j==this.getMaze()[0].length-1 && k==this.getMaze()[0][0].length-1))
-						{
-							mazeByteArray.add((byte) counter);
-							mazeByteArray.add((byte) PATH);
-							counter=0;
-						}
-					}
-						
-				}
+		for(int [][] i:this.maze)
+			for(int [] k:i)
+				for(int j:k)
+					mazeByteArray.add((byte) j);	
 		
-		
-		//return mazeByteArray.toString().getBytes();
 		byte [] arr=new byte[mazeByteArray.size()];
 		for(int i=0;i<arr.length;i++)
-		{
 			arr[i]=mazeByteArray.get(i);
-		}
 		return arr;
 	}
 }
