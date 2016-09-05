@@ -22,5 +22,8 @@ public class MyCompressorOutputStream extends OutputStream{
 		// TODO Auto-generated method stub
 		
 	}
-
+	@Override
+	public void write(byte[] b) throws IOException {
+	
+	}
 }
