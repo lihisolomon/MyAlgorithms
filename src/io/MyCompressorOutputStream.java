@@ -9,8 +9,6 @@ public class MyCompressorOutputStream extends OutputStream{
 
 	
 	protected OutputStream out;
-	final private int WALL=1;
-	final private int PATH=0;
 	
 	public MyCompressorOutputStream() throws IOException {
 		OutputStream out=new FileOutputStream("1.maz");
@@ -28,7 +26,7 @@ public class MyCompressorOutputStream extends OutputStream{
 	 */
 	@Override
 	public void write(int b) throws IOException {
-		// TODO Auto-generated method stub
+		out.write(String.valueOf(b).getBytes());
 		
 	}
 	/**
@@ -42,63 +40,28 @@ public class MyCompressorOutputStream extends OutputStream{
 	
 		 String deliminator=",";
 		 int counter=0;
-		 boolean islastOne=true;
-			
-		 for(int i=0;i<9;i++)
-		 {
-			 out.write(String.valueOf(b[i]).getBytes());
-			 out.write(String.valueOf(deliminator).getBytes());
-		 }
+		 int lastNumber=b[0];
 		 
-		for(int i=9;i<b.length;i++)
+		for(int i=0;i<b.length;i++)
 		{
-			if(b[i]==WALL)
+			if(b[i]!=lastNumber || counter==255 || i==b.length-1)
 			{
+				if( i==b.length-1)
+					counter++;
+				write(counter);
+				out.write(String.valueOf(deliminator).getBytes());
+				write(lastNumber);
+				out.write(String.valueOf(deliminator).getBytes());
+				counter=1;
+				lastNumber=b[i];
 				
-				if(!islastOne)
-				{
-					out.write(String.valueOf(counter).getBytes());
-					out.write(String.valueOf(deliminator).getBytes());
-					out.write(String.valueOf(PATH).getBytes());
-					out.write(String.valueOf(deliminator).getBytes());
-					counter=0;
-				}
-				islastOne=true;
-				counter++;
-				
-				if(counter==255 || i==b.length-1)
-				{
-					out.write(String.valueOf(counter).getBytes());
-					out.write(String.valueOf(deliminator).getBytes());
-					out.write(String.valueOf(WALL).getBytes());
-					out.write(String.valueOf(deliminator).getBytes());
-					counter=0;
-				}
 			}
 			else
-			{
-				
-				if(islastOne)
-				{
-					out.write(String.valueOf(counter).getBytes());
-					out.write(String.valueOf(deliminator).getBytes());
-					out.write(String.valueOf(WALL).getBytes());
-					out.write(String.valueOf(deliminator).getBytes());
-					counter=0;
-				}
-				
-				islastOne=false;
 				counter++;
 				
-				if(counter==255|| i==b.length-1)
-				{
-					out.write(String.valueOf(counter).getBytes());
-					out.write(String.valueOf(deliminator).getBytes());
-					out.write(String.valueOf(PATH).getBytes());
-					out.write(String.valueOf(deliminator).getBytes());
-					counter=0;
-				}
-			}
+		
 		}
+		System.out.println("sdf");
 	}
+	
 }

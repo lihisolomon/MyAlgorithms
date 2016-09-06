@@ -25,26 +25,20 @@ public class MyDecompressorInputStream extends InputStream{
 	
 	public int read(byte[] b) throws IOException
 	{
-		Scanner Scanner = new Scanner(new File("1.maz"));
-		Scanner input=Scanner.useDelimiter(",");
-		
+		Scanner input = new Scanner(new File("1.maz")).useDelimiter(",");
 
-		int counter=0,j=9;
-		byte wallOrPath=0;
-		
-		for(int i=0;i<9;i++)
-			b[i]=Byte.valueOf(input.next());
-		
+		int counter,i=0;
+		byte valueInArray;
 		
 		while(input.hasNext())
 		{
 				counter=Integer.valueOf(input.next());
-				wallOrPath=Byte.valueOf(input.next());
+				valueInArray=Byte.valueOf(input.next());
 				while (counter!=0)
 				{
-					b[j]=wallOrPath;
+					b[i]=valueInArray;
 					counter--;
-					j++;
+					i++;
 				}
 		}
 		

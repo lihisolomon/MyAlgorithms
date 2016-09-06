@@ -20,7 +20,7 @@ public class Demo {
 		SimpleMaze3dGenerator m=new SimpleMaze3dGenerator();
 		//GrowingTreeGenerator m=new GrowingTreeGenerator();lololo
 		//Maze3d maze=m.generate(x,y,z);
-		Maze3d maze=m.generate(3,3,3);
+		Maze3d maze=m.generate(2,2,2);
 		Maze3dSearchable searchableMaze=new Maze3dSearchable(maze);
 		
 		System.out.println(maze);
