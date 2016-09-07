@@ -1,6 +1,8 @@
 package algorithms.mazeGenerators;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Maze3D Class with array, startPosition and EndPosition
@@ -34,7 +36,6 @@ public class Maze3d {
 			}
 		}
 	}
-	
 	/**
 	 * Constructor
 	 * @param mazeArray - byte array to create maze from 
@@ -267,7 +268,7 @@ public class Maze3d {
 	public byte[] toByteArray()
 	{
 		ArrayList<Byte> mazeByteArray=new ArrayList<Byte>();
-		
+			
 		//Add maze dimensions
 		mazeByteArray.add((byte) this.getMaze().length);
 		mazeByteArray.add((byte) this.getMaze()[0].length);
@@ -293,6 +294,18 @@ public class Maze3d {
 			arr[i]=mazeByteArray.get(i);
 		return arr;
 	}
+	
+	/**
+	 * This function return true if the mazes are the same otherwise false
+	 * @param1 - maze Maze3d
+	 */
+	 public boolean equals(Maze3d compMaze)
+	 {
+		 if(Arrays.equals(this.toByteArray(), compMaze.toByteArray()))
+				return true;
+		 return false;
+				
+	 }
 }
 
 
