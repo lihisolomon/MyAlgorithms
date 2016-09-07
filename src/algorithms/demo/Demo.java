@@ -2,14 +2,11 @@ package algorithms.demo;
 
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 import algorithms.mazeGenerators.*;
-import algorithms.search.*;
 import io.*;
 /**
- * demo class
+ * Demo class
  */
 public class Demo {
 	/**
@@ -21,12 +18,12 @@ public class Demo {
 		//GrowingTreeGenerator m=new GrowingTreeGenerator();lololo
 		//Maze3d maze=m.generate(x,y,z);
 		Maze3d maze=m.generate(2,2,2);
-		Maze3dSearchable searchableMaze=new Maze3dSearchable(maze);
+		//Maze3dSearchable searchableMaze=new Maze3dSearchable(maze);
 		
 		System.out.println(maze);
 		System.out.println("_____________________________________________________________________");
 		try {
-			OutputStream out=new MyCompressorOutputStream( new FileOutputStream("1.maz")); 
+			OutputStream out=new MyCompressorOutputStream(new FileOutputStream("1.maz")); 
 			out.write(maze.toByteArray());
 			out.flush();
 			out.close(); 
@@ -42,24 +39,18 @@ public class Demo {
 			try {
 				in.read(b);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} 
 			try {
 				in.close();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} 
 			Maze3d loaded=new Maze3d(b); 
 			System.out.println(loaded);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		
 		
 	/*/	System.out.println(maze);
 		System.out.println("Start:");

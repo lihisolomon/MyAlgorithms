@@ -1,20 +1,25 @@
 package io;
 
-
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
+/**
+ * MyCompressorOutputStream class extends OutputStream
+ */
 public class MyCompressorOutputStream extends OutputStream{
-
-	
 	protected OutputStream out;
 	
+	/**
+	 * CTOR
+	 * @throws IOException
+	 */
 	public MyCompressorOutputStream() throws IOException {
 		OutputStream out=new FileOutputStream("1.maz");
-		
-		
 	}
+	/*
+	 * CTOR
+	 */
 	public MyCompressorOutputStream(OutputStream out)  throws IOException{
 		this.out=out;
 	}
@@ -27,8 +32,8 @@ public class MyCompressorOutputStream extends OutputStream{
 	@Override
 	public void write(int b) throws IOException {
 		out.write(String.valueOf(b).getBytes());
-		
 	}
+	
 	/**
 	 * This function compress and writes the byte array 
 	 * It inserts all the maze by sum's up all the sequential number for instance:
@@ -41,7 +46,7 @@ public class MyCompressorOutputStream extends OutputStream{
 		 String deliminator=",";
 		 int counter=0;
 		 int lastNumber=b[0];
-		 
+
 		for(int i=0;i<b.length;i++)
 		{
 			if(b[i]!=lastNumber || counter==255 || i==b.length-1)
@@ -54,14 +59,10 @@ public class MyCompressorOutputStream extends OutputStream{
 				out.write(String.valueOf(deliminator).getBytes());
 				counter=1;
 				lastNumber=b[i];
-				
 			}
 			else
 				counter++;
-				
-		
 		}
-		System.out.println("sdf");
 	}
 	
 }
