@@ -43,7 +43,7 @@ public class MyCompressorOutputStream extends OutputStream{
 	@Override
 	public void write(int b){
 		try {
-			out.write(String.valueOf(b).getBytes());
+			out.write(b);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -58,32 +58,32 @@ public class MyCompressorOutputStream extends OutputStream{
 	@Override
 	public void write(byte[] b) {
 	
-		 String deliminator=",";
 		 int counter=0;
-		 int lastNumber=b[0];
-		 
-		for(int i=0;i<b.length;i++)
-		{
-			try {
-					if(b[i]!=lastNumber || counter==255 || i==b.length-1)
+		 byte lastNumber=b[0];
+		 try { 
+			 for(int i=0;i<b.length;i++)
+			{
+				if(lastNumber != b[i])
+				{
+					while(counter>=255)
 					{
-						if( i==b.length-1)
-							counter++;
-						write(counter);
-						out.write(String.valueOf(deliminator).getBytes());
-						write(lastNumber);
-						out.write(String.valueOf(deliminator).getBytes());
-						counter=1;
-						lastNumber=b[i];
+						out.write(255);
+						out.write(lastNumber);
+						counter-=255;
 					}
-					else
-						counter++;
-				}catch (IOException e) {
-					e.printStackTrace();
-				}	
-			}
 			
-		}
-	
-	
+					out.write(counter);
+					out.write(lastNumber);
+					lastNumber = b[i];
+					counter = 1;
+				}
+				else
+					counter++;
+			}
+			out.write(counter);
+			out.write(lastNumber);
+		 } catch (IOException e) {
+				e.printStackTrace();
+			}
+	}
 }

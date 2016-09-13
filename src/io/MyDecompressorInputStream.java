@@ -21,22 +21,18 @@ public class MyDecompressorInputStream extends InputStream{
 	@Override
 	public int read() throws IOException {
 		
-		return 0;
+		return in.read();
 	}
 	
-	public int read(byte[] b)
+	public int read(byte[] b) throws IOException
 	{
-		try {
-		Scanner input;
-			input = new Scanner(new File("1.maz")).useDelimiter(",");
-		
-			int counter,i=0;
-			byte valueInArray;
+			int i=0;
+			byte counter,valueInArray;
 			
-			while(input.hasNext())
+			while(i<b.length)
 			{
-					counter=Integer.valueOf(input.next());
-					valueInArray=Byte.valueOf(input.next());
+					counter=(byte)in.read();
+					valueInArray=(byte)in.read();
 					while (counter!=0)
 					{
 						b[i]=valueInArray;
@@ -44,10 +40,7 @@ public class MyDecompressorInputStream extends InputStream{
 						i++;
 					}
 			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
 		
-		 return 0;
+		 return b.length;
 	}
 }

@@ -17,14 +17,22 @@ public class Demo {
 		SimpleMaze3dGenerator m=new SimpleMaze3dGenerator();
 		//GrowingTreeGenerator m=new GrowingTreeGenerator();lololo
 		//Maze3d maze=m.generate(x,y,z);
-		Maze3d maze=m.generate(2,2,2);
+		Maze3d maze=m.generate(6,6,6);
 		//Maze3dSearchable searchableMaze=new Maze3dSearchable(maze);
 		
 		System.out.println(maze);
 		System.out.println("_____________________________________________________________________");
 		try {
 			OutputStream out=new MyCompressorOutputStream(new FileOutputStream("1.maz")); 
-			out.write(maze.toByteArray());
+			byte[] arr=maze.toByteArray();
+			int counter=arr.length;
+			while(counter>=255)
+			{
+				out.write(255);
+				counter-=255;
+			}
+			out.write(counter);
+			out.write(arr);
 			out.flush();
 			out.close(); 
 		} catch (IOException e) {
@@ -35,7 +43,14 @@ public class Demo {
 		InputStream in;
 		try {
 			in = new MyDecompressorInputStream( new FileInputStream("1.maz"));
-			byte b[]=new byte[maze.toByteArray().length]; 
+			int size=in.read();
+			int sum=0;
+			while(size==255)
+			{	sum+=size;
+				size=in.read();
+			}
+			sum+=size;
+			byte b[]=new byte[sum]; 
 			try {
 				in.read(b);
 			} catch (IOException e) {
