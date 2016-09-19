@@ -1,12 +1,14 @@
 package algorithms.search;
 
+import java.io.Serializable;
 import java.util.Stack;
 
 /**
  * Solution class
  * @param <T> the type of class we will work with 
  */
-public class Solution<T> {
+@SuppressWarnings("serial")
+public class Solution<T> implements Serializable{
 	private Stack<T> solution;
 	
 	/**

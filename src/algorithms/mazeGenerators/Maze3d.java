@@ -1,14 +1,15 @@
 package algorithms.mazeGenerators;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * Maze3D Class with array, startPosition and EndPosition
  * @author Lihi Solomon && Lior ALtarescu
  */
-public class Maze3d {
+@SuppressWarnings("serial")
+public class Maze3d implements Serializable{
 	protected int[][][] maze;
 	protected Position start;
 	protected Position end;
@@ -306,6 +307,17 @@ public class Maze3d {
 		 return false;
 				
 	 }
+	 /**
+		 * Override equals
+		 */
+	 @Override
+	public boolean equals(Object obj)
+	{
+		if (obj == null) { return false; }
+		   if (!(obj instanceof Maze3d)) { return false; }
+		   Maze3d objM=(Maze3d)obj;
+		   return equals(objM);
+	}
 }
 
 
