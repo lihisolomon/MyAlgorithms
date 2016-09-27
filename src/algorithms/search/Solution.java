@@ -1,6 +1,7 @@
 package algorithms.search;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Stack;
 
 /**
@@ -54,5 +55,9 @@ public class Solution<T> implements Serializable{
 		}
 		string+="End!";
 		return string;
+	}
+	
+	public ArrayList<T> stackToArrayList(){
+		return new ArrayList<T>(solution);
 	}
 }

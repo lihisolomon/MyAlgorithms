@@ -17,7 +17,11 @@ public class Part2Run1 {
 		maze.getGoalPosition().printPosition();
 		
 		BFS<Position> searcherBFS=new BFS<Position>();
-		System.out.println(searcherBFS.search(searchableMaze));
+		Solution<Position> s=searcherBFS.search(searchableMaze);
+		System.out.println(s);
+		System.out.println(s.stackToArrayList());
+		
+		
 	}
 
 }
