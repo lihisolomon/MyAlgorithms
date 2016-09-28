@@ -34,7 +34,7 @@ public class DFS<T> extends CommonSearcher<T> {
 			State<T> currState=openList.pop();
 			
 			if (currState.equals(s.getGoalState())) {
-				System.out.println("DFS: number of evaluated Nodes is: "+getNumberOfNodesEvaluated());
+				//System.out.println("DFS: number of evaluated Nodes is: "+getNumberOfNodesEvaluated());
 				return backTrace(currState);
 			}
 			//if(!checkIfPosionWasVisited(closedList,currState.getValue())){

@@ -32,7 +32,7 @@ public class BFS<T> extends CommonSearcher<T> {
 			closedList.add(currState);
 			
 			if (currState.equals(s.getGoalState())) {
-				System.out.println("BFS: number of evaluated Nodes is: "+getNumberOfNodesEvaluated());
+				//System.out.println("BFS: number of evaluated Nodes is: "+getNumberOfNodesEvaluated());
 				return backTrace(currState);
 			}
 			
