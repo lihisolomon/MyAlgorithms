@@ -11,6 +11,7 @@ import io.*;
 public class Demo {
 	/**
 	 * run class the run the search
+	 * @param args- -the command and his arguments
 	 */
 	public static void main(String[] args) {
 	//public void run(int x,int y,int z){

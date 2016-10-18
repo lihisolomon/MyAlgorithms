@@ -27,7 +27,7 @@ public class State<T> implements Comparable<State<T>> {
 	}
 	/**
 	 * set the cameFrom
-	 * @param cameFrom  State<T> parameter to insert in cameFrom
+	 * @param cameFrom  State parameter to insert in cameFrom
 	 */
 	public void setCameFrom(State<T> cameFrom) {
 		this.cameFrom = cameFrom;
@@ -56,8 +56,8 @@ public class State<T> implements Comparable<State<T>> {
 	}
 	
 	/**
-	 * set the value
-	 * @param value
+	 * set the value of the state
+	 * @param value of the state
 	 */
 	public void setValue(T value) {
 		this.value = value;
@@ -72,8 +72,8 @@ public class State<T> implements Comparable<State<T>> {
 	}
 	
 	/**
-	 * set the key
-	 * @param key
+	 * set the key of the state
+	 * @param key of the state
 	 */
 	public void setKey(String key) {
 		this.key = key;
@@ -82,7 +82,7 @@ public class State<T> implements Comparable<State<T>> {
 	/**
      * Override of Object's equals method
      * check if the object state is equal to this state
-     * @param obj State<T> object  
+     * @param obj State object  
      */
 	@SuppressWarnings("rawtypes")
 	@Override
@@ -101,7 +101,7 @@ public class State<T> implements Comparable<State<T>> {
 	/**
      * Override of Comparable compareTo method
      * compare two States
-     * @param obj State<T> object 
+     * @param s State object 
      */
 	@Override
 	public int compareTo(State<T> s) {

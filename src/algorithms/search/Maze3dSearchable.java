@@ -5,7 +5,7 @@ import java.util.List;
 
 import algorithms.mazeGenerators.*;
 /**
- * Maze3dSearchable class implements Searchable<Position>\
+ * Maze3dSearchable class implements Searchable
  */
 public class Maze3dSearchable implements Searchable<Position> {
 	private Maze3d maze;
@@ -20,7 +20,7 @@ public class Maze3dSearchable implements Searchable<Position> {
 	
 	/**
 	 * Override of Searchable method getStartState
-	 * @return State<Position> the start position 
+	 * @return State- the start position 
 	 */
 	@Override
 	public State<Position> getStartState() {
@@ -29,7 +29,7 @@ public class Maze3dSearchable implements Searchable<Position> {
 
 	/**
 	 * Override of Searchable method getGoalState
-	 * @return State<Position> the goal position 
+	 * @return State the goal position 
 	 */
 	@Override
 	public State<Position> getGoalState() {

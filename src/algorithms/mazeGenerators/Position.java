@@ -84,7 +84,7 @@ public class Position implements Serializable{
 	
 	/**
 	 * Override object method equals
-	 * @param obj the object we will check if equal
+	 * @param pos- obj the object we will check if equal
 	 * @return true if equal and false if not
 	 */
 	@Override

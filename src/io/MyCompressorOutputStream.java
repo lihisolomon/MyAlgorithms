@@ -37,8 +37,7 @@ public class MyCompressorOutputStream extends OutputStream{
 	
 	/**
 	 * Overrides the write class and writes bytes array to file
-	 * @param1 b 
-	 * 
+	 * @param b- int to write
 	 */
 	@Override
 	public void write(int b){
@@ -52,8 +51,8 @@ public class MyCompressorOutputStream extends OutputStream{
 	/**
 	 * This function compress and writes the byte array 
 	 * It inserts all the maze by sum's up all the sequential number for instance:
-	 * 1,1,1 -> 3,1 && 0,0,1,1 -> 2,0,2,1
-	 * @param1 - b byte array
+	 * 1,1,1 to 3,1 AND 0,0,1,1 to 2,0,2,1
+	 * @param  b- byte array
 	 */
 	@Override
 	public void write(byte[] b) {

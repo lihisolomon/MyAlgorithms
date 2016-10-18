@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Stack;
 
 /**
- * DFS generic class extends CommonSearcher<T>
+ * DFS generic class extends CommonSearcher
  * @param <T> he type of class we will work with
  */
 public class DFS<T> extends CommonSearcher<T> {
@@ -23,7 +23,7 @@ public class DFS<T> extends CommonSearcher<T> {
 	
 	/**
 	 * Override Searcher method search (implement abstract method from CommonSearcher)
-	 * @param s Searchable<T>  type 
+	 * @param s Searchable  type 
 	 * @return Solution to the problem 
 	 */
 	@Override

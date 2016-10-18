@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 /**
  * Maze3D Class with array, startPosition and EndPosition
- * @author Lihi Solomon && Lior ALtarescu
+ * @author Lihi Solomon AND Lior ALtarescu
  */
 @SuppressWarnings("serial")
 public class Maze3d implements Serializable{
@@ -73,7 +73,7 @@ public class Maze3d implements Serializable{
 
 	/**
 	 * set the maze
-	 * @param maze
+	 * @param maze-the maze
 	 */
 	public void setMaze(int[][][] maze) {
 		this.maze = maze;
@@ -89,7 +89,7 @@ public class Maze3d implements Serializable{
 
 	/**
 	 * set the start Position of the maze
-	 * @param start
+	 * @param start position
 	 */
 	public void setStartPosition(Position start) {
 		maze[start.getX()][start.getY()][start.getZ()]=PATH;
@@ -106,7 +106,7 @@ public class Maze3d implements Serializable{
 
 	/**
 	 * set the start Position of the maze
-	 * @param end
+	 * @param end position
 	 */
 	public void setGoalPosition(Position end) {
 		maze[end.getX()][end.getY()][end.getZ()]=PATH;
@@ -215,7 +215,7 @@ public class Maze3d implements Serializable{
 	
 	/**
 	 * get possible moves from a position
-	 * @param p the position to check
+	 * @param pos the position to check
 	 * @return String[] of the possible moves
 	 */
 	public String[] getPossibleMoves(Position pos)
@@ -264,7 +264,8 @@ public class Maze3d implements Serializable{
 	 * First it input the maze dimentions :Floors,Rows,Colums
 	 * Seconds It inserts the start point and goal point in (x,y,z) format
 	 * Third it inserts all the maze by sum's up all the sequential number for instance:
-	 * 1,1,1 -> 3,1 && 0,0,1,1 -> 2,0,2,1
+	 * 1,1,1 to 3,1 and 0,0,1,1 to 2,0,2,1
+	 * @return byte array
 	 */
 	public byte[] toByteArray()
 	{
@@ -298,7 +299,8 @@ public class Maze3d implements Serializable{
 	
 	/**
 	 * This function return true if the mazes are the same otherwise false
-	 * @param1 - maze Maze3d
+	 * @param compMaze- maze Maze3d
+	 * @return boolean parm
 	 */
 	 public boolean equals(Maze3d compMaze)
 	 {
@@ -307,9 +309,10 @@ public class Maze3d implements Serializable{
 		 return false;
 				
 	 }
+
 	 /**
-		 * Override equals
-		 */
+	  * Override equals func
+	  */
 	 @Override
 	public boolean equals(Object obj)
 	{

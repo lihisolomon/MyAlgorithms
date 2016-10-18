@@ -8,7 +8,7 @@ public interface Searcher<T> {
 	
 	/**
 	 * the search method
-	 * @param s Searchable<T> type 
+	 * @param s - Searchable type 
 	 * @return Solution to the problem 
 	 */
 	public Solution<T> search(Searchable<T> s);

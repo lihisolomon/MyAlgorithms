@@ -22,16 +22,16 @@ public interface Searchable <T> {
 	
 	/**
 	 * get all the possible moves from a State
-	 * @param state the state we check
+	 * @param s - the state we check
 	 * @return ArrayList of states that we can move to from the state we are checking
 	 */
 	public List<State<T>> getAllPossibleStates(State<T> s);
 	
 	/**
 	 * calc the cost of currState
-	 * @param currState
-	 * @param neighbor
-	 * @return the cost
+	 * @param currState- the current state
+	 * @param neighbor -the neighbor
+	 * @return the cost -the cost
 	 */
 	public double getMoveCost(State<T> currState, State<T> neighbor);
 }

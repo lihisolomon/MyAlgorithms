@@ -30,7 +30,7 @@ public class Solution<T> implements Serializable{
 
 	/**
 	 * set the solution array
-	 * @param solution
+	 * @param solution -the solution
 	 */
 	public void setStates(Stack<T> solution) {
 		this.solution = solution;
