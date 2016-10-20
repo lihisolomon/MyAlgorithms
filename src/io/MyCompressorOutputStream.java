@@ -56,33 +56,22 @@ public class MyCompressorOutputStream extends OutputStream{
 	 */
 	@Override
 	public void write(byte[] b) {
-	
-		 int counter=0;
-		 byte lastNumber=b[0];
-		 try { 
-			 for(int i=0;i<b.length;i++)
+		byte lastNumber = b[0];
+		int counter = 0;
+		
+		for (byte myByte : b)
+		{
+			if ((myByte == lastNumber) && (counter < 255))
+				counter++;
+			else
 			{
-				if(lastNumber != b[i])
-				{
-					while(counter>=255)
-					{
-						out.write(255);
-						out.write(lastNumber);
-						counter-=255;
-					}
-			
-					out.write(counter);
-					out.write(lastNumber);
-					lastNumber = b[i];
-					counter = 1;
-				}
-				else
-					counter++;
+				write((byte)counter);
+				write(lastNumber);
+				counter = 1;
+				lastNumber = myByte;
 			}
-			out.write(counter);
-			out.write(lastNumber);
-		 } catch (IOException e) {
-				e.printStackTrace();
-			}
+		}
+		write((byte)counter);
+		write(lastNumber);
 	}
 }
